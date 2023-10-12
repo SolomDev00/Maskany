@@ -1,6 +1,6 @@
-body {
+/* body {
   overflow-y: hidden;
-}
+} */
 
 section {
   width: 100%;
@@ -140,7 +140,7 @@ section {
 .bottomSide {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 7px;
 }
 
@@ -158,9 +158,10 @@ section {
 }
 
 .rightSide img {
-  border-radius: 12px 0px 12px 12px;
+  border-radius: 0px;
   width: 470px;
-  max-height: 400px;
+  min-height: 340px;
+  max-height: 350px;
   cursor: pointer;
 }
 
@@ -188,4 +189,32 @@ section {
 
 .markerPrice {
   color: red !important;
+}
+
+/* Home */
+
+.plus {
+  padding: 15px 25px 15px 25px;
+  gap: 15px;
+}
+
+.dataTitle {
+  font-size: 32px;
+}
+
+.leftSide .dataPrice {
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+.dataDetails {
+  font-size: 17px;
+}
+
+.boPlus {
+  margin-bottom: 25px;
+}
+
+.poPlus {
+  overflow: hidden;
 }

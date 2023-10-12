@@ -1,4 +1,4 @@
-import "./HomeStyle.css";
+import "./PublicStyle.css";
 import axios from "axios";
 import Modal from "react-modal";
 import Cookie from "cookie-universal";
@@ -11,6 +11,7 @@ import {
   SEEN_REQUEST,
   baseURL,
 } from "../../API/Api";
+import { useNavigate } from "react-router-dom";
 
 export default function Map() {
   const [data, setData] = useState([]);
@@ -22,6 +23,15 @@ export default function Map() {
 
   // Cookies
   const cookie = Cookie();
+  const navigate = useNavigate();
+
+  // If not Login Out this User!
+  useEffect(() => {
+    const token = cookie.get("solom");
+    if (!token) {
+      navigate("/login");
+    }
+  });
 
   // Get Token & Custom Config
   const token = cookie.get("solom");
@@ -89,7 +99,6 @@ export default function Map() {
         .catch((error) => console.log(error));
     }
   }, [selectedMarker]);
-  console.log(selectedMarker);
 
   // Pop-up Open
   const openModal = () => {
