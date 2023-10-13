@@ -45,16 +45,16 @@ export default function Navbar() {
           <div className="search">
             <NavLink
               activeclassname="active-link"
-              to={"/quick"}
+              to={"/search"}
               className={() =>
-                "searchBtn" + (nav === "/quick" ? " active-link" : "")
+                "searchBtn" + (nav === "/search" ? " active-link" : "")
               }
               onClick={handleToggle}
             >
               بحث
               <FaSearch
                 className={() =>
-                  "search-icon" + (nav === "/quick" ? " active-link" : "")
+                  "search-icon" + (nav === "/search" ? " active-link" : "")
                 }
               />
             </NavLink>
@@ -79,13 +79,13 @@ export default function Navbar() {
           <NavLink
             activeclassname="active-link"
             className={() =>
-              "searchWithMap" + (nav === "/search" ? " active-link" : "")
+              "searchWithMap" + (nav === "/mapsearch" ? " active-link" : "")
             }
-            to={"/search"}
+            to={"/mapsearch"}
           >
             <FaMapMarkerAlt
               className={() =>
-                "search-icon" + (nav === "/search" ? " active-link" : "")
+                "search-icon" + (nav === "/mapsearch" ? " active-link" : "")
               }
             />
             البحث بالخريطة
@@ -117,7 +117,11 @@ export default function Navbar() {
             </div>
             <Dropdown.Menu>
               <Dropdown.Item href="#/action-1">حسابي</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">المفضلات</Dropdown.Item>
+              <Dropdown.Item href="">
+                <Link style={{ textDecoration: "none" }} to={"/favourites"}>
+                  مفضلتي
+                </Link>
+              </Dropdown.Item>
               <Dropdown.Item
                 style={{ color: "#fd7571" }}
                 onClick={() => handleLogout()}

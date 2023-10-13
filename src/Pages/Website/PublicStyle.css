@@ -200,6 +200,7 @@ section {
 
 .dataTitle {
   font-size: 32px;
+  padding-top: 10px;
 }
 
 .leftSide .dataPrice {
@@ -217,4 +218,149 @@ section {
 
 .poPlus {
   overflow: hidden;
+  height: 300px;
+}
+
+/* Search */
+
+.titleSearchSection {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.searchTitle {
+  font-size: 24px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.searchInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  border: 1px solid #9b927d;
+  box-shadow: rgba(0, 0, 0, 0.23) 0px 5px 15px;
+}
+
+.searchInput svg {
+  color: #9b927d;
+}
+
+.searchInput input {
+  width: 95%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  padding: 10px;
+  color: #9b927d;
+}
+
+.searchInput input::placeholder {
+  color: #b6b6b6;
+}
+
+.searchInput input:focus {
+  box-shadow: none;
+}
+
+.buttonGroup {
+  width: 100%;
+}
+
+.colorButton,
+.colorButton2 {
+  width: 50%;
+  padding: 10px 15px;
+  border-radius: 0 20px 20px 0;
+  background-color: white;
+  outline: none;
+  color: #b6b6b6;
+  border: 1px solid #dbdbdb;
+}
+
+.colorButton2 {
+  border-radius: 20px 0 0 20px;
+}
+
+.selectedButton {
+  background-color: #9b927d;
+  color: white;
+}
+
+.typeButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.typeButton {
+  width: fit-content;
+  padding: 10px 30px;
+  border-radius: 24px;
+  background-color: white;
+  outline: none;
+  color: #000;
+  border: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.selectedTypeButton {
+  background-color: #9b927d;
+  color: white;
+  transition: 0.3s;
+}
+
+.typeButton svg {
+  color: #f65858;
+}
+
+.searchSelectPrice {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.searchSelectPrice select {
+  padding: 5px 100px;
+}
+
+.searchSelectPrice select option,
+.searchSelectPrice select option:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.searchSelectPrice select option:checked {
+  background-color: #9c917d;
+  color: #fff;
+}
+
+.btnSubmit {
+  margin-top: 150px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.submitFormSearch {
+  width: 20%;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 22px;
+  transition: 0.5s;
+  padding: 5px 25px;
+  border-radius: 11px;
+  background-color: #9b927d;
+}
+
+.submitFormSearch:hover {
+  scale: 1.1;
 }

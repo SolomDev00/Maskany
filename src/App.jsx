@@ -8,6 +8,8 @@ import RequireBack from "./Pages/Auth/RequireBack";
 import ResetPassword from "./Pages/Auth/ResetPassword";
 import AQR from "./API/AQR";
 import Map from "./Pages/Website/Map";
+import UserFavourites from "./Pages/Website/User/UserFavourite";
+import Search from "./Pages/Website/Search";
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/otp" element={<OTP />} />
         <Route path="/map" element={<Map />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/favourites" element={<UserFavourites />} />
+        <Route path="/favourites/update" element={<UserFavourites />} />
         <Route element={<RequireBack />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
