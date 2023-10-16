@@ -44,11 +44,11 @@ export default function UserFavourites() {
     setIsLoading(true);
     axios
       .get(`${baseURL}/${FAV_REQUEST}`, config)
-      // .then((res) => console.log(res.data))
-      .then((res) => {
-        setData(res.data);
-        setIsLoading(false);
-      })
+      .then((res) => console.log(res.data))
+      // .then((res) => {
+      //   setData(res.data);
+      //   setIsLoading(false);
+      // })
       .catch((error) => console.error(error));
     setIsLoading(false);
   }, []);

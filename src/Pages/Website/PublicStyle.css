@@ -191,6 +191,29 @@ section {
   color: red !important;
 }
 
+.mapAPI {
+  position: relative;
+}
+
+.mapTypeButtons {
+  position: absolute;
+  bottom: 120px;
+  right: 8px;
+  z-index: 1;
+}
+
+.satelliteBtn {
+  padding: 5px 10px;
+  border-radius: 8px;
+  background-color: #9b927d;
+  border: 1px solid #a59e8d;
+}
+
+.satelliteIcon {
+  font-size: 24px;
+  color: white;
+}
+
 /* Home */
 
 .plus {
@@ -219,6 +242,7 @@ section {
 .poPlus {
   overflow: hidden;
   height: 300px;
+  cursor: pointer;
 }
 
 /* Search */
@@ -363,4 +387,225 @@ section {
 
 .submitFormSearch:hover {
   scale: 1.1;
+}
+
+/* ProperyDetails */
+
+.propertySection {
+  margin-top: 50px;
+}
+
+.titlepropertySection {
+  font-size: 22px;
+  color: #9b927d;
+  margin-bottom: 15px;
+}
+
+.sides {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.rightSideP {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.images {
+  width: 500px;
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  cursor: pointer;
+}
+
+.images .singleImage img {
+  width: 100%;
+  height: auto;
+  border: 2px solid white;
+  border-radius: 16px;
+}
+
+.images .twoImages img {
+  width: 50%;
+  height: 200px;
+  border: 2px solid white;
+  border-radius: 0px 16px 16px 0px;
+}
+
+.images .twoImages img:nth-child(2) {
+  border-radius: 16px 0px 0px 16px;
+}
+
+.threeImages {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  height: 350px;
+}
+
+.threeImages .left img,
+.threeImages .right img {
+  width: 300px;
+  height: auto;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.threeImages .right {
+  display: flex;
+  flex-direction: column;
+}
+
+.threeImages .right img {
+  height: 50%;
+  border-radius: 0px 16px 0px 0px;
+}
+
+.threeImages .right img:nth-child(2) {
+  height: 50%;
+  border-radius: 0px 0px 16px 0px;
+}
+
+.rightSideP .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.rightSideP .left img {
+  height: 100%;
+  border-radius: 16px 0px 0px 16px;
+}
+
+.addHistory {
+  font-size: 16px;
+  color: #9b927d;
+}
+
+.propertyDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.propertyPrice {
+  font-size: 20px;
+  color: #9b927d;
+}
+
+.propertyLocation {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.TitlePropertyDetails {
+  font-size: 22px;
+}
+
+.propertyDetails:nth-child(even) {
+  background-color: #f4f5f6;
+}
+
+.propertySpace,
+.propertyRooms,
+.propertyBathroom,
+.propertyFloor,
+.propertyView,
+.propertyPay,
+.propertyAD {
+  width: 250px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.propertyAD {
+  margin-bottom: 15px;
+}
+
+.propertyDesc {
+  font-size: 16px;
+  width: 600px;
+  margin-bottom: 30px;
+}
+
+.leftSideP {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.shareAndFavourite {
+  border-radius: 13px;
+  padding: 15px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.favouriteBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #9b927d;
+}
+
+.favouriteBtn svg {
+  cursor: pointer;
+}
+
+.spaceHr {
+  width: 100%;
+  border-radius: 2px;
+  border-top: 2px solid #191717;
+  box-shadow: rgba(156, 145, 125, 0.35) 0px 5px 15px !important;
+}
+
+.contactBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.contactEmailBtn,
+.contactPhoneBtn {
+  border: none;
+  font-size: 18px;
+  transition: 0.5s;
+  padding: 5px 15px;
+  border-radius: 12px;
+  color: white;
+  background-color: #9c917d;
+}
+
+.contactEmailBtn:hover,
+.contactPhoneBtn:hover {
+  scale: 1.1;
+}
+
+.ADS h2 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 26px;
+}
+
+.favBtnSetting {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.searchNow {
+  border: none;
+  background-color: #9b927d;
+  padding: 5px 15px;
+  font-size: 20px;
+  color: white;
+  border-radius: 11px;
 }

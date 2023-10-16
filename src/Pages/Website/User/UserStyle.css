@@ -119,6 +119,7 @@
 }
 
 .favUserContant {
+  cursor: pointer;
   max-width: 370px;
   min-width: 370px;
   transition: 0.5s;
@@ -129,10 +130,9 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.favUserContant:hover {
+/* .favUserContant:hover {
   scale: 1.1;
-  cursor: pointer;
-}
+} */
 
 .favUserSide {
   padding: 10px;

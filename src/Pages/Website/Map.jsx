@@ -4,7 +4,13 @@ import Modal from "react-modal";
 import Cookie from "cookie-universal";
 import React, { useEffect, useState } from "react";
 import Navbar from "../../Components/Dashboard/NavBar";
-import { FaBath, FaBed, FaChair } from "react-icons/fa";
+import {
+  FaBath,
+  FaBed,
+  FaChair,
+  FaMapMarkedAlt,
+  FaSatellite,
+} from "react-icons/fa";
 import {
   CATE_REQUEST,
   MAP_REQUEST,
@@ -16,9 +22,11 @@ import { useNavigate } from "react-router-dom";
 export default function Map() {
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [mapType, setMapType] = useState("roadmap");
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [buttonColor, setButtonColor] = useState("#9b927d");
+  const [isSatellite, setIsSatellite] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [buttonColor, setButtonColor] = useState("transparent");
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   // Cookies
@@ -52,6 +60,7 @@ export default function Map() {
     axios
       .get(`${baseURL}/${MAP_REQUEST}`, config)
       .then((res) => setData(res.data))
+      // .then((res) => console.log(res.data))
       .catch((error) => console.error(error));
   }, []);
 
@@ -140,7 +149,35 @@ export default function Map() {
       mapTypeControl: false,
       fullScreenControl: false,
       streetViewControl: false,
+      scaleControl: true,
+      fullscreenControl: false,
+      styles: [
+        {
+          featureType: "poi.business",
+          elementType: "labels",
+          stylers: [
+            {
+              visibility: "off",
+            },
+          ],
+        },
+      ],
+      gestureHandling: "greedy",
+      disableDoubleClickZoom: true,
+      mapTypeId: mapType,
+      mapTypeControlOptions: {
+        style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        position: window.google.maps.ControlPosition.BOTTOM_CENTER,
+        mapTypeIds: [
+          window.google.maps.MapTypeId.ROADMAP,
+          window.google.maps.MapTypeId.SATELLITE,
+          window.google.maps.MapTypeId.HYBRID,
+        ],
+      },
+      zoomControl: true,
+      clickableIcons: false,
     };
+
     const map = new window.google.maps.Map(
       document.getElementById("map"),
       mapOptions
@@ -205,11 +242,16 @@ export default function Map() {
         { passive: true }
       );
     });
-  }, [data, selectedCategory]);
+  }, [data, selectedCategory, mapType]);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     setButtonColor("#9b927d");
+  };
+
+  const handleMapTypeChange = (type) => {
+    setMapType(type);
+    setIsSatellite(!isSatellite);
   };
 
   return (
@@ -249,6 +291,18 @@ export default function Map() {
         </div>
         <div className="mapAPI" style={{ marginTop: "5px" }}>
           <div id="map" style={{ width: "100%", height: "760px" }}></div>
+          <div className="mapTypeButtons">
+            <button
+              className="satelliteBtn"
+              onClick={() =>
+                handleMapTypeChange(isSatellite ? "roadmap" : "satellite")
+              }
+            >
+              <span className="satelliteIcon" role="img" aria-label="Map Type">
+                {isSatellite ? <FaSatellite /> : <FaMapMarkedAlt />}
+              </span>
+            </button>
+          </div>
         </div>
         <Modal
           isOpen={modalIsOpen}

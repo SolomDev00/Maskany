@@ -75,6 +75,11 @@ export default function Home() {
     setButtonColor("#9b927d");
   };
 
+  //
+  const handlePaddingSideClick = (propertyId) => {
+    navigate(`/property/${propertyId}`);
+  };
+
   return (
     <>
       <Navbar />
@@ -116,7 +121,10 @@ export default function Home() {
           ) : Array.isArray(filteredData()) && filteredData().length > 0 ? (
             filteredData().map((item) => (
               <div className="popup-padding" key={item.id}>
-                <div className="paddingSide poPlus">
+                <div
+                  className="paddingSide poPlus"
+                  onClick={() => handlePaddingSideClick(item.id)}
+                >
                   <div className="leftSide plus">
                     <div className="topSide">
                       <h2 className="dataTitle">{item.title}</h2>

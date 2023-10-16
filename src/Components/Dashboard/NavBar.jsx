@@ -116,8 +116,12 @@ export default function Navbar() {
               />
             </div>
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">حسابي</Dropdown.Item>
-              <Dropdown.Item href="">
+              <Dropdown.Item>
+                <Link style={{ textDecoration: "none" }} to={"/settings"}>
+                  حسابي
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
                 <Link style={{ textDecoration: "none" }} to={"/favourites"}>
                   مفضلتي
                 </Link>
