@@ -15,6 +15,7 @@ import {
 import { FAV_REQUEST, baseURL } from "../../../API/Api";
 import Navbar from "../../../Components/Dashboard/NavBar";
 import { Container, Form } from "react-bootstrap";
+import LoadingSubmit from "../../../Components/Loading/Loading";
 
 export default function UserFavourites() {
   const [data, setData] = useState([]);
@@ -44,14 +45,29 @@ export default function UserFavourites() {
     setIsLoading(true);
     axios
       .get(`${baseURL}/${FAV_REQUEST}`, config)
-      .then((res) => console.log(res.data))
-      // .then((res) => {
-      //   setData(res.data);
-      //   setIsLoading(false);
-      // })
+      .then((res) => {
+        setData(res.data);
+        // setIsLoading(false);
+      })
       .catch((error) => console.error(error));
-    setIsLoading(false);
   }, []);
+
+  // Handle favorite toggle
+  const handleFavoriteToggle = async (propertyId, index) => {
+    try {
+      const response = await axios.delete(
+        `${baseURL}/properties/fav/${data[index].id}`,
+        config
+      );
+      if (response.status === 204) {
+        const updatedData = [...data];
+        updatedData.splice(index, 1);
+        setData(updatedData);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -91,59 +107,71 @@ export default function UserFavourites() {
           </div>
           <div className="fav-content">
             {isLoading ? (
-              <div className="loading-spinner">⏳</div>
+              <LoadingSubmit />
             ) : (
               <div className="fav-padding">
-                <div className="favUserContant">
-                  <div className="favUserImage">
-                    <img
-                      src={require("../../../Assets/Images/home.jpg")}
-                      alt="Fav"
-                    />
-                  </div>
-                  <div className="favUserSide">
-                    <div className="favUserDetails">
-                      <h2 className="favUserPrice"> 67.000 جنية مصري</h2>
-                      <p className="favUserDesc">
-                        امتلك وحدتك الان في Bahya برؤيه ثلاثيه على ..
-                      </p>
-                      <div className="favUserLocation">
-                        <FaMapMarkerAlt /> {""}
-                        جزيرة العرب
-                      </div>
-                      <div className="bottomSide boPlus">
-                        <div className="markerSpace">300 م² | </div>
-                        <div className="markerIcons">
-                          <FaChair /> 2
-                          <FaBath /> 3
-                          <FaBed /> 6
+                {data.slice(0, 6).map((item, index) => (
+                  <div className="favUserContant" key={index}>
+                    <div className="favUserImage">
+                      <img
+                        src={baseURL + item.property.images[0].image}
+                        alt="Fav"
+                      />
+                    </div>
+                    <div className="favUserSide">
+                      <div className="favUserDetails">
+                        <h2 className="favUserPrice">
+                          {item.property.price} جنية مصري
+                        </h2>
+                        <p className="favUserDesc">{item.property.details}</p>
+                        <div className="favUserLocation">
+                          <FaMapMarkerAlt /> {""}
+                          {item.property.city}
                         </div>
-                      </div>
-                      <div className="spaceContent">
-                        <div className="hrSettings">
-                          <hr />
+                        <div className="bottomSide boPlus">
+                          <div className="markerSpace">
+                            {item.property.space} م² |{" "}
+                          </div>
+                          <div className="markerIcons">
+                            <FaChair /> {item.property.floor}
+                            <FaBath /> {item.property.bathrooms}
+                            <FaBed /> {item.property.rooms}
+                          </div>
                         </div>
-                      </div>
-                      <div className="favBtnSettings">
-                        <div className="addToFav">
-                          <FaHeart />
-                          مفضلتي
+                        <div className="spaceContent">
+                          <div className="hrSettings">
+                            <hr />
+                          </div>
                         </div>
-                        <div className="addToNote">
-                          <FaStickyNote />
-                          ملاحظة
-                        </div>
-                        <div className="share">
-                          <FaShareAlt />
-                          مشاركة
+                        <div className="favBtnSettings">
+                          <div
+                            className="addToFav"
+                            onClick={() =>
+                              handleFavoriteToggle(item.property.id, index)
+                            }
+                          >
+                            <FaHeart
+                              style={{
+                                color: `${item.favorite ? "black" : "red"}`,
+                              }}
+                            />
+                            مفضلتي
+                          </div>
+                          <div className="addToNote">
+                            <FaStickyNote />
+                            ملاحظة
+                          </div>
+                          <div className="share">
+                            <FaShareAlt />
+                            مشاركة
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             )}
-            {/* {!isLoading && <div>لا يوجد عناصر مفضلة بالنسبة اليك .</div>} */}
           </div>
         </section>
       </Container>

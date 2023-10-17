@@ -116,23 +116,28 @@
 
 .fav-padding {
   margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  transition: 0.5s;
 }
 
 .favUserContant {
   cursor: pointer;
-  max-width: 370px;
-  min-width: 370px;
+  max-width: 330px;
+  min-width: 330px;
   transition: 0.5s;
   overflow: hidden;
   border-radius: 16px;
   background-color: white;
+  transition: 0.5s;
   border: 1px solid #d2d2d2;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-
-/* .favUserContant:hover {
-  scale: 1.1;
-} */
 
 .favUserSide {
   padding: 10px;
@@ -151,6 +156,8 @@
 .favUserDesc {
   margin-bottom: 0px;
   font-size: 18px;
+  height: 60px;
+  overflow: hidden;
 }
 
 .favUserLocation {
@@ -193,4 +200,8 @@
 
 .addToFav svg {
   color: #f65858;
+}
+
+.fav-content {
+  width: 100%;
 }

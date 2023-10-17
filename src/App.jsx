@@ -12,6 +12,7 @@ import UserFavourites from "./Pages/Website/User/UserFavourite";
 import Search from "./Pages/Website/Search";
 import UserSettings from "./Pages/Website/User/UserSettings";
 import ProperyDetails from "./Pages/Website/PropertyDetails";
+import LoadingSubmit from "./Components/Loading/Loading";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/resetpassword" element={<ResetPassword />} />
         </Route>
         <Route path="/*" element={<Err404 />} />
+        <Route path="/test" element={<LoadingSubmit />} />
       </Routes>
     </div>
   );

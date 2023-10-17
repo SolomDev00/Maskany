@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Dashboard/NavBar";
 import { FaBath, FaBed, FaChair } from "react-icons/fa";
 import { CATE_REQUEST, MAP_REQUEST, baseURL } from "../../API/Api";
+import LoadingSubmit from "../../Components/Loading/Loading";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -39,8 +40,8 @@ export default function Home() {
     setIsLoading(true);
     axios
       .get(`${baseURL}/${MAP_REQUEST}`, config)
-      // .then((res) => console.log(res.data))
       .then((res) => {
+        // console.log(res.data);
         setData(res.data);
         setIsLoading(false);
       })
@@ -75,9 +76,12 @@ export default function Home() {
     setButtonColor("#9b927d");
   };
 
-  //
-  const handlePaddingSideClick = (propertyId) => {
-    navigate(`/property/${propertyId}`);
+  const handlePaddingSideClick = (propID) => {
+    if (propID === 3) {
+      navigate(`/property/2`);
+    } else {
+      navigate(`/property/${propID}`);
+    }
   };
 
   return (
@@ -117,14 +121,15 @@ export default function Home() {
         </div>
         <div className="popup-content">
           {isLoading ? (
-            <div className="loading-spinner">⏳</div>
+            <LoadingSubmit />
           ) : Array.isArray(filteredData()) && filteredData().length > 0 ? (
-            filteredData().map((item) => (
-              <div className="popup-padding" key={item.id}>
+            filteredData().map((item, key) => (
+              <div className="popup-padding" key={key}>
                 <div
                   className="paddingSide poPlus"
-                  onClick={() => handlePaddingSideClick(item.id)}
+                  onClick={() => handlePaddingSideClick(item.id - 1)}
                 >
+                  {console.log(item)}
                   <div className="leftSide plus">
                     <div className="topSide">
                       <h2 className="dataTitle">{item.title}</h2>

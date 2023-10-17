@@ -11,7 +11,7 @@ import {
   FaPhoneAlt,
 } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
-import { MAP_REQUEST, baseURL } from "../../API/Api";
+import { FAV_REQUEST, MAP_REQUEST, baseURL } from "../../API/Api";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DateTime } from "luxon";
@@ -19,7 +19,9 @@ import LoadingSubmit from "../../Components/Loading/Loading";
 
 export default function PropertyDetails() {
   const [data, setData] = useState([]);
+  const [dataADS, setDataADS] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [favourites, setFavourites] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const { id } = useParams();
@@ -32,19 +34,40 @@ export default function PropertyDetails() {
 
   // Get Marker Data
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`${baseURL}/${MAP_REQUEST}`, customConfig)
+      // .then((res) => console.log(res.data))
       .then((res) => {
         setData(res.data[id]);
+      })
+      .catch((error) => console.error(error));
+  }, [id]);
+
+  useEffect(() => {
+    axios
+      .get(`${baseURL}/${MAP_REQUEST}`, customConfig)
+      // .then((res) => console.log(res.data))
+      .then((res) => {
+        setDataADS(res.data);
         setIsLoading(false);
       })
       .catch((error) => console.error(error));
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`${baseURL}/${FAV_REQUEST}`, customConfig)
+      .then((res) => {
+        const favoritesList = res.data[id].id;
+        setFavourites(favoritesList);
+        setIsFavorite(favoritesList.includes(data.id));
+      })
+      .catch((error) => console.error(error));
+  }, [id]);
+
   const handleFavoriteClick = () => {
-    // Check if the property is already in favorites
     if (isFavorite) {
-      // Remove from favorites
       axios
         .delete(
           `http://66.45.248.247:8000/properties/fav/prop/${data.id}/`,
@@ -52,10 +75,11 @@ export default function PropertyDetails() {
         )
         .then(() => {
           setIsFavorite(false);
+          setFavourites(favourites.filter((fav) => fav !== data.id));
         })
         .catch((error) => console.error(error));
     } else {
-      // Add to favorites
+      setIsFavorite(true);
       axios
         .post(
           `http://66.45.248.247:8000/properties/fav/`,
@@ -65,7 +89,8 @@ export default function PropertyDetails() {
           customConfig
         )
         .then((res) => {
-          setIsFavorite(true); // Update isFavorite to true
+          setIsFavorite(true);
+          setFavourites([...favourites, data.id]);
         })
         .catch((error) => console.error(error));
     }
@@ -176,26 +201,33 @@ export default function PropertyDetails() {
                   <div className="favUserContant">
                     <div className="favUserImage">
                       <img
-                        src={require("../../Assets/Images/home.jpg")}
+                        src={
+                          baseURL +
+                          (id === 0
+                            ? dataADS[1].images[0].image
+                            : dataADS[0].images[0].image)
+                        }
                         alt="Fav"
                       />
                     </div>
                     <div className="favUserSide">
                       <div className="favUserDetails">
-                        <h2 className="favUserPrice">67.000 جنية مصري</h2>
-                        <p className="favUserDesc">
-                          امتلك وحدتك الان في Bahya برؤيه ثلاثيه على ..
-                        </p>
+                        <h2 className="favUserPrice">
+                          {dataADS[0].price} جنية مصري
+                        </h2>
+                        <p className="favUserDesc">{dataADS[0].details} </p>
                         <div className="favUserLocation">
                           <FaMapMarkerAlt /> {""}
-                          جزيرة العرب
+                          {dataADS[0].city}
                         </div>
                         <div className="bottomSide boPlus">
-                          <div className="markerSpace">300 م² | </div>
+                          <div className="markerSpace">
+                            {dataADS[0].space} م² |{" "}
+                          </div>
                           <div className="markerIcons">
-                            <FaChair /> 2
-                            <FaBath /> 3
-                            <FaBed /> 6
+                            <FaChair /> {dataADS[0].floor}
+                            <FaBath /> {dataADS[0].bathrooms}
+                            <FaBed /> {dataADS[0].rooms}
                           </div>
                         </div>
                         <div className="spaceContent">

@@ -1,12 +1,17 @@
-import "./PublicStyle.css";
+import axios from "axios";
+import { useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import Navbar from "../../Components/Dashboard/NavBar";
-import { useState } from "react";
 import { FaMapMarkerAlt, FaTimes } from "react-icons/fa";
+import Cookie from "cookie-universal";
 
 export default function Search() {
+  const [searchResults, setSearchResults] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
   const [selectedButton, setSelectedButton] = useState("button1");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [city, setCity] = useState("");
 
   const handleButtonClick = (button) => {
     setSelectedButton(button);
@@ -14,6 +19,30 @@ export default function Search() {
 
   const handleTypeSelect = (type) => {
     setSelectedType(type === selectedType ? "all" : type);
+  };
+
+  const cookie = Cookie();
+  const token = cookie.get("solom");
+
+  const handleSearch = () => {
+    axios
+      .get(`http://66.45.248.247:8000/properties/`, {
+        params: {
+          type: selectedType,
+          minPrice,
+          maxPrice,
+          city,
+        },
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((res) => {
+        setSearchResults(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -30,6 +59,8 @@ export default function Search() {
               <FaMapMarkerAlt />
               <Form.Control
                 type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
                 placeholder={"المدينة او الحي او الشارع"}
               />
             </div>
@@ -68,14 +99,12 @@ export default function Search() {
                 </button>
                 <button
                   className={`typeButton ${
-                    selectedType === "button1" ? "selectedTypeButton" : ""
+                    selectedType === "2" ? "selectedTypeButton" : ""
                   }`}
-                  onClick={() => handleTypeSelect("button1")}
+                  onClick={() => handleTypeSelect("2")}
                 >
                   للبيع
-                  {selectedType === "button1" && (
-                    <FaTimes className="cancelIcon" />
-                  )}
+                  {selectedType === "2" && <FaTimes className="cancelIcon" />}
                 </button>
                 <button
                   className={`typeButton ${
@@ -116,36 +145,44 @@ export default function Search() {
               <h3 className="searchTitle">السعر</h3>
               <div className="searchSelectPrice">
                 <div className="lowPrice">
-                  <select>
-                    <option defaultChecked>اقل سعر</option>
-                    <option value="160-50">25,000</option>
-                    <option value="260-50">50,000</option>
-                    <option value="360-50">100,000</option>
-                    <option value="460-50">200,000</option>
-                    <option value="5-50">300,000</option>
-                    <option value="6-50">400,000</option>
-                    <option value="7-50">600,000</option>
-                    <option value="680-50">800,000</option>
+                  <select
+                    value={minPrice}
+                    onChange={(e) => setMinPrice(e.target.value)}
+                  >
+                    <option value="">اقل سعر</option>
+                    <option value="25000">25,000</option>
+                    <option value="50000">50,000</option>
+                    <option value="100000">100,000</option>
                   </select>
                 </div>
                 <div className="highPrice">
-                  <select>
-                    <option defaultChecked>اعلي سعر</option>
-                    <option value="160-50">25,000</option>
-                    <option value="260-50">50,000</option>
-                    <option value="360-50">100,000</option>
-                    <option value="460-50">200,000</option>
-                    <option value="5-50">300,000</option>
-                    <option value="6-50">400,000</option>
-                    <option value="7-50">600,000</option>
-                    <option value="680-50">800,000</option>
+                  <select
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                  >
+                    <option value="">اعلى سعر</option>
+                    <option value="25000">25,000</option>
+                    <option value="50000">50,000</option>
+                    <option value="100000">100,000</option>
+                    {/* يمكنك إضافة المزيد من الخيارات هنا */}
                   </select>
                 </div>
               </div>
             </div>
             <div className="btnSubmit">
-              <button className="submitFormSearch">بحث الآن</button>
+              <button onClick={handleSearch} className="submitFormSearch">
+                بحث الآن
+              </button>
             </div>
+          </div>
+          <div>
+            {searchResults.map((result, index) => (
+              <div key={index}>
+                {/* {console.log(result)} */}
+                <p>عنوان العقار: {result.title}</p>
+                <p>نوع العقار: {result.category.name}</p>
+              </div>
+            ))}
           </div>
         </section>
       </Container>
