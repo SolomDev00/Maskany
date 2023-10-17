@@ -127,3 +127,48 @@ nav {
 .active-link {
   color: rgb(58, 162, 247);
 }
+
+.dropdown-item {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-item a {
+  color: #707070;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+}
+
+.item.active,
+.dropdown-item:active {
+  background-color: #9b927d !important;
+}
+
+@media (max-width: 767px) {
+  .search,
+  .payDay,
+  .support,
+  .packages,
+  .searchWithMap {
+    display: none !important;
+  }
+  .dropDown {
+    justify-content: space-between;
+    width: 80px;
+  }
+  .dropDown button {
+    width: 60px;
+  }
+}
+
+@media (min-width: 767px) {
+  #phoneOnly {
+    display: none !important;
+  }
+}

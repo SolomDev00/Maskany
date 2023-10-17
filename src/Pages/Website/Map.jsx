@@ -312,7 +312,7 @@ export default function Map() {
           overlayClassName="overlay"
           ariaHideApp={false}
         >
-          <div className="popup-content">
+          <div className="popup-content plplus">
             {selectedMarker && (
               <div>
                 <span className="popup-close" onClick={closeModal}>

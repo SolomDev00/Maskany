@@ -8,7 +8,10 @@ import {
   FaCalendarAlt,
   FaProjectDiagram,
   FaUserCircle,
+  FaHeart,
+  FaUserAlt,
 } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Cookie from "cookie-universal";
 
@@ -116,21 +119,42 @@ export default function Navbar() {
               />
             </div>
             <Dropdown.Menu>
+              <Dropdown.Item id="phoneOnly">
+                <Link to={"/settings"}>
+                  البحث <FaSearch />
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item id="phoneOnly">
+                <Link to={"/settings"}>
+                  الإيجار اليومي <FaCalendarAlt />
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item id="phoneOnly">
+                <Link to={"/settings"}>
+                  الخريطة <FaMapMarkerAlt />
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item id="phoneOnly">
+                <Link to={"/settings"}>
+                  الباقات <FaProjectDiagram />
+                </Link>
+              </Dropdown.Item>
+              <hr id="phoneOnly" />
               <Dropdown.Item>
-                <Link style={{ textDecoration: "none" }} to={"/settings"}>
-                  حسابي
+                <Link to={"/settings"}>
+                  حسابي <FaUserAlt />
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item>
-                <Link style={{ textDecoration: "none" }} to={"/favourites"}>
-                  مفضلتي
+                <Link to={"/favourites"}>
+                  مفضلتي <FaHeart />
                 </Link>
               </Dropdown.Item>
               <Dropdown.Item
                 style={{ color: "#fd7571" }}
                 onClick={() => handleLogout()}
               >
-                تسجيل الخروج
+                تسجيل الخروج <FiLogOut />
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

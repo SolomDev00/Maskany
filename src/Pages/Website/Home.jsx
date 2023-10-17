@@ -12,7 +12,7 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
-  const [buttonColor, setButtonColor] = useState("#9b927d");
+  const [buttonColor, setButtonColor] = useState("transparent");
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   // Cookies
@@ -41,7 +41,6 @@ export default function Home() {
     axios
       .get(`${baseURL}/${MAP_REQUEST}`, config)
       .then((res) => {
-        // console.log(res.data);
         setData(res.data);
         setIsLoading(false);
       })
@@ -54,7 +53,6 @@ export default function Home() {
     axios
       .get(`${baseURL}/${CATE_REQUEST}`, config)
       .then((res) => setCategories(res.data))
-      // .then((res) => console.log(res.data))
       .catch((error) => console.error(error));
   }, []);
 
@@ -129,7 +127,6 @@ export default function Home() {
                   className="paddingSide poPlus"
                   onClick={() => handlePaddingSideClick(item.id - 1)}
                 >
-                  {console.log(item)}
                   <div className="leftSide plus">
                     <div className="topSide">
                       <h2 className="dataTitle">{item.title}</h2>

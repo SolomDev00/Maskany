@@ -181,4 +181,12 @@ a.faqPassword {
   .re-Login {
     width: 95%;
   }
+  .coypRight {
+    width: 100%;
+  }
+  .authFormStyle,
+  .authFormStyleR,
+  .authFormTitleStyle {
+    width: 95%;
+  }
 }

@@ -205,3 +205,29 @@
 .fav-content {
   width: 100%;
 }
+
+@media (max-width: 767px) {
+  .UserSection {
+    width: 100%;
+  }
+  .selectUserSub {
+    gap: 15px;
+    width: 100%;
+    flex-direction: column;
+  }
+  .btnUserSub {
+    width: 100%;
+  }
+  .searchUser {
+    width: 100%;
+    height: 100px;
+    flex-direction: column;
+  }
+  .searchUser div {
+    width: 102%;
+    align-items: flex-start;
+  }
+  .favUserContant {
+    min-width: 100%;
+  }
+}

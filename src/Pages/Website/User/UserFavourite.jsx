@@ -47,7 +47,8 @@ export default function UserFavourites() {
       .get(`${baseURL}/${FAV_REQUEST}`, config)
       .then((res) => {
         setData(res.data);
-        // setIsLoading(false);
+        console.log(res.data);
+        setIsLoading(false);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -72,43 +73,43 @@ export default function UserFavourites() {
   return (
     <>
       <Navbar />
-      <Container>
-        <section className="UserSection">
-          <div className="titleUserSection">
-            <h2>المفضلة</h2>
-          </div>
-          <div className="selectUserSub">
-            <div className="btnUserSub">
-              <Link to={"/favourites"}>
-                <div className="btnFav">
-                  <div className="btnName">
-                    <FaHeart />
-                    <h2>مفضلتي</h2>
-                  </div>
-                  <div className="btnArrow">&gt;</div>
-                </div>
-              </Link>
-              <Link to={"/notes"}>
-                <div className="btnNote">
-                  <div className="btnName">
-                    <FaStickyNote />
-                    <h2>ملاحظاتي</h2>
-                  </div>
-                  <div className="btnArrow">&gt;</div>
-                </div>
-              </Link>
+      {isLoading ? (
+        <LoadingSubmit />
+      ) : (
+        <Container>
+          <section className="UserSection">
+            <div className="titleUserSection">
+              <h2>المفضلة</h2>
             </div>
-            <div className="searchUser">
-              <h3>شارك هذه العقارات</h3>
-              <div>
-                <Form.Control type="text" defaultValue={"www.google.com"} />
+            <div className="selectUserSub">
+              <div className="btnUserSub">
+                <Link to={"/favourites"}>
+                  <div className="btnFav">
+                    <div className="btnName">
+                      <FaHeart />
+                      <h2>مفضلتي</h2>
+                    </div>
+                    <div className="btnArrow">&gt;</div>
+                  </div>
+                </Link>
+                <Link to={"/notes"}>
+                  <div className="btnNote">
+                    <div className="btnName">
+                      <FaStickyNote />
+                      <h2>ملاحظاتي</h2>
+                    </div>
+                    <div className="btnArrow">&gt;</div>
+                  </div>
+                </Link>
+              </div>
+              <div className="searchUser">
+                <h3>شارك هذه العقارات</h3>
+                <div>
+                  <Form.Control type="text" defaultValue={"www.google.com"} />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="fav-content">
-            {isLoading ? (
-              <LoadingSubmit />
-            ) : (
+            <div className="fav-content">
               <div className="fav-padding">
                 {data.slice(0, 6).map((item, index) => (
                   <div className="favUserContant" key={index}>
@@ -171,10 +172,10 @@ export default function UserFavourites() {
                   </div>
                 ))}
               </div>
-            )}
-          </div>
-        </section>
-      </Container>
+            </div>
+          </section>
+        </Container>
+      )}
     </>
   );
 }

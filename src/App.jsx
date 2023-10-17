@@ -1,18 +1,17 @@
+import Map from "./Pages/Website/Map";
 import Login from "./Pages/Auth/Login";
 import Home from "./Pages/Website/Home";
 import OTP from "./Pages/Auth/OTPSystem";
+import Search from "./Pages/Website/Search";
 import Err404 from "./Pages/Auth/Errors/404";
 import Register from "./Pages/Auth/Register";
 import { Route, Routes } from "react-router-dom";
 import RequireBack from "./Pages/Auth/RequireBack";
 import ResetPassword from "./Pages/Auth/ResetPassword";
-import AQR from "./API/AQR";
-import Map from "./Pages/Website/Map";
-import UserFavourites from "./Pages/Website/User/UserFavourite";
-import Search from "./Pages/Website/Search";
+import LoadingSubmit from "./Components/Loading/Loading";
 import UserSettings from "./Pages/Website/User/UserSettings";
 import ProperyDetails from "./Pages/Website/PropertyDetails";
-import LoadingSubmit from "./Components/Loading/Loading";
+import UserFavourites from "./Pages/Website/User/UserFavourite";
 
 function App() {
   return (
