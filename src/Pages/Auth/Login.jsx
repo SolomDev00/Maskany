@@ -54,7 +54,7 @@ const Login = () => {
       setLoading(false);
       const token = res.data.token;
       cookie.set("solom", token);
-console.log(res)
+      console.log(res)
       navigate("/", { replace: true });
     } catch (err) {
       setLoading(false);
