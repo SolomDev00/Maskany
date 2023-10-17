@@ -57,7 +57,7 @@ const Login = () => {
       navigate("/", { replace: true });
     } catch (err) {
       setLoading(false);
-      if (err.response.status === 400) {
+      if (err.response.?status === 400) {
         setErr("اسم المستخدم او كلمة المرور غير صحيحة ..");
       } else {
         setErr("مشكلة من الخادم ، يرجي المحاولة بعد قليل ..");
