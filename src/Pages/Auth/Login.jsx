@@ -50,10 +50,11 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(`${baseURL}/${LOGIN}`, form);
+      const res = await axios.post(`http://66.45.248.247:8000/auth/login/`, form);
       setLoading(false);
       const token = res.data.token;
       cookie.set("solom", token);
+console.log(res)
       navigate("/", { replace: true });
     } catch (err) {
       setLoading(false);
