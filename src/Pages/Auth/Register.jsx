@@ -54,7 +54,7 @@ export default function Register() {
       Navigate("/", { replace: true });
     } catch (err) {
       setLoading(false);
-      if (err.response.status === 400) {
+      if (err.?response.?status === 400) {
         setErr("البريد الالكتروني مستخدم مسبقاً أو كلمة المرور غير متطابقة ..");
       } else {
         setErr("مشكلة من الخادم ، يرجي المحاولة بعد قليل ..");
