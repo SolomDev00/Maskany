@@ -42,25 +42,26 @@ export default function Register() {
     focus.current.focus();
   }, []);
 
-  // Handle Submit
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await axios.post(`${baseURL}/${REGISTER}`, form);
-      setLoading(false);
-      const token = res.data.token;
-      cookie.set("solom", token);
-      Navigate("/", { replace: true });
-    } catch (err) {
-      setLoading(false);
-      if (err.?response.?status === 400) {
-        setErr("البريد الالكتروني مستخدم مسبقاً أو كلمة المرور غير متطابقة ..");
-      } else {
-        setErr("مشكلة من الخادم ، يرجي المحاولة بعد قليل ..");
-      }
+// Handle Submit
+async function handleSubmit(e) {
+  e.preventDefault();
+  setLoading(true);
+  try {
+    const res = await axios.post(`${baseURL}/${REGISTER}`, form);
+    setLoading(false);
+    const token = res.data.token;
+    cookie.set("solom", token);
+    Navigate("/", { replace: true });
+  } catch (err) {
+    setLoading(false);
+    if (err?.response?.status === 400) {
+      setErr("البريد الالكتروني مستخدم مسبقاً أو كلمة المرور غير متطابقة ..");
+    } else {
+      setErr("مشكلة من الخادم ، يرجى المحاولة بعد قليل ..");
     }
   }
+}
+
 
   return (
     <>
