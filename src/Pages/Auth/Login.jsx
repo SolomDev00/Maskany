@@ -58,8 +58,8 @@ async function handleSubmit(e) {
     navigate("/", { replace: true });
   } catch (err) {
     setLoading(false);
-    if (err.response && err.response.status === 400) {
-      setErr("اسم المستخدم او كلمة المرور غير صحيحة ..");
+if (err.response.status ===400){setErr(response["detail"])}      
+setErr("اسم المستخدم او كلمة المرور غير صحيحة ..");
     } else {
       setErr("مشكلة من الخادم ، يرجى المحاولة بعد قليل ..");
     }
